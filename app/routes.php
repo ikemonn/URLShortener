@@ -13,5 +13,46 @@
 
 Route::get('/', function()
 {
-	return View::make('hello');
+	return View::make('form');
 });
+
+Route::post('/', function(){
+	//フォームのバリデーションルールを定義する
+	$rules = array(
+		'link' => 'required|url'
+	);
+	//バリデーション
+	$validation = Validator::make(Input::all(), $rules);
+	//バリデーションに引っかかった場合、メインページでエラーを出す
+	if($validation->fails()) {
+		return Redirect::to('/')
+		->withInput()
+		->withErrors($validation);
+	} else {
+		//既にリンクがDBにあるか確認。ある場合はその結果を返す
+		$link = Link::where('url', '=', Input::get('link'))
+		->first();
+		//URLが既にDBに登録されている場合、その情報をviewに返す
+		if($link) {
+			return Redirect::to('/')
+			->withInput()
+			->with('link', $link->hash);
+		} else {
+			//登録されていなければ新しいユニークなURLを作る
+			do {
+				$newHash = Str::random(6);
+			} while (Link::where('hash', '=', $newHash)->count() > 0);
+
+			//DBにレコード追加
+			Link::create(array(
+				'url' => Input::get('link'),
+				'hash' => $newHash
+			));
+
+			//新しい短縮URLを返す
+			return Redirect::to('/')
+			->withInput()
+			->with('link', $newHash);
+		}
+	}
+})
