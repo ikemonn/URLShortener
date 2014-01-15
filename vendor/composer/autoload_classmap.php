@@ -28,7 +28,7 @@ return array(
     'ClassPreloader\\Parser\\DirVisitor' => $vendorDir . '/classpreloader/classpreloader/src/ClassPreloader/Parser/DirVisitor.php',
     'ClassPreloader\\Parser\\FileVisitor' => $vendorDir . '/classpreloader/classpreloader/src/ClassPreloader/Parser/FileVisitor.php',
     'ClassPreloader\\Parser\\NodeTraverser' => $vendorDir . '/classpreloader/classpreloader/src/ClassPreloader/Parser/NodeTraverser.php',
-    'CreateLinksTable' => $baseDir . '/app/database/migrations/2014_01_15_212150_create_links_table.php',
+    'CreateLinksTable' => $baseDir . '/app/database/migrations/2014_01_15_220330_create_links_table.php',
     'Crypt_AES' => $vendorDir . '/phpseclib/phpseclib/phpseclib/Crypt/AES.php',
     'Crypt_Blowfish' => $vendorDir . '/phpseclib/phpseclib/phpseclib/Crypt/Blowfish.php',
     'Crypt_DES' => $vendorDir . '/phpseclib/phpseclib/phpseclib/Crypt/DES.php',
